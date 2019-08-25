@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Geother">
 <meta property="og:description" content="最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-25T14:03:25.613Z">
+<meta property="og:updated_time" content="2019-08-25T14:16:10.105Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="惊了，我连Floyd都不会">
 <meta name="twitter:description" content="最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。">
@@ -322,18 +322,18 @@
       
         <p>最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。</p>
 <a id="more"></a>
-<p>引言</p>
-<p>$folyd$的本质是动态规划，利用一条路径一定又经过的点的性质（<del>这不是废话吗</del>），代码看起来就像一个单纯的填表，但是实际上模拟时，我却发现代码的过程很有一种区间$DP$的感觉。</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a><i class="fa fa-lightbulb-o" aria-hidden="true"></i>引言</h2><p>$folyd$的本质是动态规划，利用一条路径一定又经过的点的性质（<del>这不是废话吗</del>），代码看起来就像一个单纯的填表，但是实际上模拟时，我却发现代码的过程很有一种区间$DP$的感觉。</p>
 <p>虽然算法复杂度高达$O \left( n\mathop{ {} }\nolimits^{ {3} } \right) $，但是利用$Floyd$ 特有的在特定的层数（例如当前中间点为K），$dp[i][j]$的值只可能与$[1,K]$中的点有联系。换句话说，$Folyd$可以保证某一时刻最短路的某些性质。</p>
-<p>栗子</p>
-<p>这道题就是利用了$Folyd$的特性：<a href="https://loj.ac/problem/10072/" target="_blank" rel="noopener">Sightseeing Trip</a></p>
+<h2 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a><i class="fa fa-lightbulb-o" aria-hidden="true"></i>栗子</h2><p>这道题就是利用了$Folyd$的特性：<a href="https://loj.ac/problem/10072/" target="_blank" rel="noopener">Sightseeing Trip</a></p>
+<blockquote>
 <p>给定一张无向图，求图中一个至少包含 $3$ 个点的环，环上的节点不重复，并且环上的边的长度之和最小。该问题称为无向图的最小环问题。在本题中，你需要输出最小环的方案，若最小环不唯一，输出任意一个均可。若无解，输出 <code>No solution.</code>  </p>
 <p>图的节点数不超过 $100$。</p>
+</blockquote>
 <p>此题难在如何找到一个环，以及如何找到答案环的路径。</p>
-<p>找环：</p>
+<p><i class="fa fa-rocket" aria-hidden="true"></i>找环：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; k; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ans &gt; dp[i][j] + mp[j][k] + mp[k][i]) &#123;</span><br><span class="line">                ans = dp[i][j] + mp[j][k] + mp[k][i];</span><br><span class="line">                更新路径；</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> 	Do something...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此处在进入最外层循环后，立即进行如上操作，则所有$dp[i][j]$存储的都是不经过中间点$k$时的最短路径，若此时加入点$k$能更新$dp[i][j]$，就意味着找到了一个$i \to k \to j$的环，因为现在的$k$肯定不在$i$到$j$的最短路径上。</p>
-<p>找路径：</p>
+<p><i class="fa fa-rocket" aria-hidden="true"></i>找路径：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">          <span class="keyword">if</span> (dp[i][j] &gt; dp[i][k] + dp[k][j]) &#123;</span><br><span class="line">               pos[i][j] = k;</span><br><span class="line">               dp[i][j] = dp[i][k] + dp[k][j];</span><br><span class="line">           &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
 <p>$pos[i][j]$记录着$i$到$j$最短路经过的中间点$k$是什么，如此循环往复不断递归找路，最后就会找到一条$i$到$j$的最短路径，而且由于巧妙地递归，找到的点一定是按顺序排列好的。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetPath</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!pos[x][y])</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    GetPath(x, pos[x][y]);</span><br><span class="line">    P.push_back(pos[x][y]);</span><br><span class="line">    GetPath(pos[x][y], y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -447,8 +447,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -478,7 +487,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -547,6 +556,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引言"><span class="nav-number">1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栗子"><span class="nav-number">2.</span> <span class="nav-text">栗子</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
