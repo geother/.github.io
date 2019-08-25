@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="Geother">
 <meta property="og:description" content="最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-25T14:16:10.105Z">
+<meta property="og:updated_time" content="2019-08-25T14:17:46.606Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="惊了，我连Floyd都不会">
 <meta name="twitter:description" content="最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。">
@@ -322,7 +322,7 @@
       
         <p>最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。</p>
 <a id="more"></a>
-<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a><i class="fa fa-lightbulb-o" aria-hidden="true"></i>引言</h2><p>$folyd$的本质是动态规划，利用一条路径一定又经过的点的性质（<del>这不是废话吗</del>），代码看起来就像一个单纯的填表，但是实际上模拟时，我却发现代码的过程很有一种区间$DP$的感觉。</p>
+<h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a><i class="fa fa-lightbulb-o" aria-hidden="true"></i>引言</h2><p>$folyd$的本质是动态规划，利用一条路径一定有经过的点的性质（<del>这不是废话吗</del>），代码看起来就像一个单纯的填表，但是实际上模拟时，我却发现代码的过程很有一种区间$DP$的感觉。</p>
 <p>虽然算法复杂度高达$O \left( n\mathop{ {} }\nolimits^{ {3} } \right) $，但是利用$Floyd$ 特有的在特定的层数（例如当前中间点为K），$dp[i][j]$的值只可能与$[1,K]$中的点有联系。换句话说，$Folyd$可以保证某一时刻最短路的某些性质。</p>
 <h2 id="栗子"><a href="#栗子" class="headerlink" title="栗子"></a><i class="fa fa-lightbulb-o" aria-hidden="true"></i>栗子</h2><p>这道题就是利用了$Folyd$的特性：<a href="https://loj.ac/problem/10072/" target="_blank" rel="noopener">Sightseeing Trip</a></p>
 <blockquote>
