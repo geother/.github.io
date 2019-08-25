@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="最短路,">
 
 
 
@@ -89,17 +89,18 @@
 
 
 
-<meta name="description" content="弱省弱市老年Oier  文化课弱到不行  但是喜欢OI  而且在B站和云村有房">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于YBH">
-<meta property="og:url" content="https://geother.github.io/about/index.html">
+<meta name="description" content="最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。">
+<meta name="keywords" content="最短路">
+<meta property="og:type" content="article">
+<meta property="og:title" content="惊了，我连Floyd都不会">
+<meta property="og:url" content="https://geother.github.io/2019/08/25/弗洛伊德/index.html">
 <meta property="og:site_name" content="Geother">
-<meta property="og:description" content="弱省弱市老年Oier  文化课弱到不行  但是喜欢OI  而且在B站和云村有房">
+<meta property="og:description" content="最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-07-19T14:55:32.240Z">
+<meta property="og:updated_time" content="2019-08-25T14:03:25.613Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于YBH">
-<meta name="twitter:description" content="弱省弱市老年Oier  文化课弱到不行  但是喜欢OI  而且在B站和云村有房">
+<meta name="twitter:title" content="惊了，我连Floyd都不会">
+<meta name="twitter:description" content="最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。">
 
 
 
@@ -129,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://geother.github.io/about/">
+  <link rel="canonical" href="https://geother.github.io/2019/08/25/弗洛伊德/">
 
 
 
 
 
-  <title>关于YBH | Geother</title>
+  <title>惊了，我连Floyd都不会 | Geother</title>
   
 
 
@@ -250,38 +251,170 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://geother.github.io/2019/08/25/弗洛伊德/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YBH">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Geother">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">关于YBH</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <blockquote class="blockquote-center"><p><font face="Fangsong" size="5" color="#856">弱省弱市老年Oier </font><br></p>
-<p><font face="Fangsong" size="5" color="#856">文化课弱到不行 </font><br></p>
-<p><font face="Fangsong" size="5" color="#856">但是喜欢OI </font><br></p>
-<p><font face="Fangsong" size="5" color="#856">而且在B站和云村<del>有房</del></font><br></p>
-</blockquote>
-
+          <h1 class="post-title" itemprop="name headline">惊了，我连Floyd都不会</h1>
         
-      </div>
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <p>最开始萌新以为$Floyd$就是一个单纯的暴力，直到如今，我才明白$Floyd$的理解难度并不亚于$Spfa$以及$Dijkstra$。</p>
+<a id="more"></a>
+<p>引言</p>
+<p>$folyd$的本质是动态规划，利用一条路径一定又经过的点的性质（<del>这不是废话吗</del>），代码看起来就像一个单纯的填表，但是实际上模拟时，我却发现代码的过程很有一种区间$DP$的感觉。</p>
+<p>虽然算法复杂度高达$O \left( n\mathop{ {} }\nolimits^{ {3} } \right) $，但是利用$Floyd$ 特有的在特定的层数（例如当前中间点为K），$dp[i][j]$的值只可能与$[1,K]$中的点有联系。换句话说，$Folyd$可以保证某一时刻最短路的某些性质。</p>
+<p>栗子</p>
+<p>这道题就是利用了$Folyd$的特性：<a href="https://loj.ac/problem/10072/" target="_blank" rel="noopener">Sightseeing Trip</a></p>
+<p>给定一张无向图，求图中一个至少包含 $3$ 个点的环，环上的节点不重复，并且环上的边的长度之和最小。该问题称为无向图的最小环问题。在本题中，你需要输出最小环的方案，若最小环不唯一，输出任意一个均可。若无解，输出 <code>No solution.</code>  </p>
+<p>图的节点数不超过 $100$。</p>
+<p>此题难在如何找到一个环，以及如何找到答案环的路径。</p>
+<p>找环：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= n; k++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; k; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; k; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (ans &gt; dp[i][j] + mp[j][k] + mp[k][i]) &#123;</span><br><span class="line">                ans = dp[i][j] + mp[j][k] + mp[k][i];</span><br><span class="line">                更新路径；</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> 	Do something...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此处在进入最外层循环后，立即进行如上操作，则所有$dp[i][j]$存储的都是不经过中间点$k$时的最短路径，若此时加入点$k$能更新$dp[i][j]$，就意味着找到了一个$i \to k \to j$的环，因为现在的$k$肯定不在$i$到$j$的最短路径上。</p>
+<p>找路径：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">     <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">          <span class="keyword">if</span> (dp[i][j] &gt; dp[i][k] + dp[k][j]) &#123;</span><br><span class="line">               pos[i][j] = k;</span><br><span class="line">               dp[i][j] = dp[i][k] + dp[k][j];</span><br><span class="line">           &#125;</span><br><span class="line">     &#125;</span><br></pre></td></tr></table></figure>
+<p>$pos[i][j]$记录着$i$到$j$最短路经过的中间点$k$是什么，如此循环往复不断递归找路，最后就会找到一条$i$到$j$的最短路径，而且由于巧妙地递归，找到的点一定是按顺序排列好的。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">GetPath</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!pos[x][y])</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    GetPath(x, pos[x][y]);</span><br><span class="line">    P.push_back(pos[x][y]);</span><br><span class="line">    GetPath(pos[x][y], y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就A掉了这道题。</p>
+<p>目前我对$Folyd$就了解这些。</p>
+
       
     </div>
     
     
     
+
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YBH
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://geother.github.io/2019/08/25/弗洛伊德/" title="惊了，我连Floyd都不会">https://geother.github.io/2019/08/25/弗洛伊德/</a>
+  </li>
+<li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明YBH及出处哦！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/最短路/" rel="tag"><i class="fa fa-tag"></i> 最短路</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/08/21/模板库/" rel="next" title="YBH常用模板">
+                <i class="fa fa-chevron-left"></i> YBH常用模板
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -290,6 +423,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
