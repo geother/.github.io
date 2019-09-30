@@ -1833,7 +1833,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff4054;
+  background: #0eff4b;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3020,13 +3020,6 @@ a {
   outline: none;
   border-bottom: none;
   word-wrap: break-word;
-}
-body {
-  background: url("https://s2.ax1x.com/2019/10/01/uNQEwt.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: 50% 50%;
 }
 .main-inner {
   background: #fff;
