@@ -1833,7 +1833,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #0eff4b;
+  background: #ff28aa;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3021,10 +3021,10 @@ a {
   border-bottom: none;
   word-wrap: break-word;
 }
-.main-inner {
-  background: #fff;
-  opacity: 0.9;
-}
-.header-inner {
-  opacity: 0.95;
+body {
+  background: url("https://s2.ax1x.com/2019/11/14/MUCnVU.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: 50% 50%;
 }
