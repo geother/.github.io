@@ -89,17 +89,19 @@
 
 
 
-<meta name="description" content="心血来潮决定整理整理我的博客。 永久丢弃了曾经写的题解，将具有纪念意义的几篇随笔保存下来。">
+<meta name="description" content="我用的雷蛇驱动中鼠标宏想要连点必须按住不放，写的连点脚本却因为按键精灵频繁被迈克菲与火绒联合绞杀而难以应用。故使用C++调用Win api实现简易连点器。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="readme.txt">
-<meta property="og:url" content="https://geother.github.io/2020/05/13/declare/index.html">
+<meta property="og:title" content="简易连点器工具放出">
+<meta property="og:url" content="https://geother.github.io/2020/05/17/click/index.html">
 <meta property="og:site_name" content="Geother">
-<meta property="og:description" content="心血来潮决定整理整理我的博客。 永久丢弃了曾经写的题解，将具有纪念意义的几篇随笔保存下来。">
+<meta property="og:description" content="我用的雷蛇驱动中鼠标宏想要连点必须按住不放，写的连点脚本却因为按键精灵频繁被迈克菲与火绒联合绞杀而难以应用。故使用C++调用Win api实现简易连点器。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-05-13T11:37:47.292Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/17/Y21PgA.png">
+<meta property="og:updated_time" content="2020-05-17T05:31:30.140Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="readme.txt">
-<meta name="twitter:description" content="心血来潮决定整理整理我的博客。 永久丢弃了曾经写的题解，将具有纪念意义的几篇随笔保存下来。">
+<meta name="twitter:title" content="简易连点器工具放出">
+<meta name="twitter:description" content="我用的雷蛇驱动中鼠标宏想要连点必须按住不放，写的连点脚本却因为按键精灵频繁被迈克菲与火绒联合绞杀而难以应用。故使用C++调用Win api实现简易连点器。">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/05/17/Y21PgA.png">
 
 
 
@@ -129,13 +131,13 @@
 
 
 
-  <link rel="canonical" href="https://geother.github.io/2020/05/13/declare/">
+  <link rel="canonical" href="https://geother.github.io/2020/05/17/click/">
 
 
 
 
 
-  <title>readme.txt | Geother</title>
+  <title>简易连点器工具放出 | Geother</title>
   
 
 
@@ -262,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://geother.github.io/2020/05/13/declare/">
+    <link itemprop="mainEntityOfPage" href="https://geother.github.io/2020/05/17/click/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YBH">
@@ -279,7 +281,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">readme.txt</h1>
+          <h1 class="post-title" itemprop="name headline">简易连点器工具放出</h1>
         
 
         <div class="post-meta">
@@ -319,8 +321,22 @@
       
 
       
-        <p>心血来潮决定整理整理我的博客。</p>
-<p>永久丢弃了曾经写的题解，将具有纪念意义的几篇随笔保存下来。</p>
+        <p>我用的雷蛇驱动中鼠标宏想要连点必须按住不放，写的连点脚本却因为按键精灵频繁被迈克菲与火绒联合绞杀而难以应用。故使用<code>C++</code>调用<code>Win api</code>实现简易连点器。</p>
+<p><img src="https://s1.ax1x.com/2020/05/17/Y21PgA.png" alt></p>
+<a id="more"></a>
+<p>下载<code>click.zip</code>，解压后得到本体<code>click.exe</code>。</p>
+<p><a href="https://img.nga.178.com/attachments/mon_202005/17/-4bvoQ5-ler6K2a.zip?filename=click.zip" target="_blank" rel="noopener"><strong>点击下载</strong></a></p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>1.将鼠标移动到<strong>需要连点的位置</strong>，按键盘上的<strong>“S”</strong>键。</p>
+<p>2.按<strong>空格键</strong>开始连点，<strong>再次按下</strong>则停止连点。</p>
+<h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><p>第一步中，不要点击程序窗口以外的其他位置，只是把鼠标挪到相应位置再按S即可，否则程序不能读取到键盘活动。</p>
+<p>第二步可以反复开始停止，但是选定连点位置后不可更改位置，若更改位置需要重新启动此程序。</p>
+<p>所有操作皆为<strong>点击</strong>，不需要长按。</p>
+<h2 id="代码及原理"><a href="#代码及原理" class="headerlink" title="代码及原理"></a>代码及原理</h2><p>这个程序过于简单，没什么好说的。</p>
+<p><code>_Get()</code>函数获取坐标</p>
+<p><code>GetKeyState()</code>获取键盘状态</p>
+<p><code>mouse_event(MOUSEEVENTF_LEFTDOWN,M.x,M.y,0,0)</code>实现定点左击</p>
+<p>修改 <code>work()</code>中的<code>Sleep()</code>函数即可改变频率，设定为30是为了防止占用过多内存，同时我所用的常用软件<del>(如钉钉)</del>所能承受的最高频率就是30左右。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">POINT M;</span><br><span class="line"><span class="keyword">int</span> cnt = <span class="number">0</span>, tot = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">void</span> _Get()&#123;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		<span class="keyword">if</span>(GetKeyState(<span class="string">'S'</span>) &lt; <span class="number">0</span>)&#123;</span><br><span class="line">			GetCursorPos(&amp;M);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		Sleep(<span class="number">100</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">work</span><span class="params">()</span></span>&#123;</span><br><span class="line">	cnt = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">		mouse_event(MOUSEEVENTF_LEFTDOWN,M.x,M.y,<span class="number">0</span>,<span class="number">0</span>);</span><br><span class="line">		++cnt;</span><br><span class="line">		Sleep(<span class="number">33</span>);</span><br><span class="line">		<span class="keyword">if</span>(GetKeyState(VK_SPACE) &lt; <span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	_Get();</span><br><span class="line">	<span class="keyword">while</span>(<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(GetKeyState(VK_SPACE) &lt; <span class="number">0</span>)&#123; </span><br><span class="line">			Sleep(<span class="number">200</span>);</span><br><span class="line">			work();</span><br><span class="line">			tot += cnt;</span><br><span class="line">			Sleep(<span class="number">200</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -341,7 +357,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://geother.github.io/2020/05/13/declare/" title="readme.txt">https://geother.github.io/2020/05/13/declare/</a>
+    <a href="https://geother.github.io/2020/05/17/click/" title="简易连点器工具放出">https://geother.github.io/2020/05/17/click/</a>
   </li>
 <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -363,8 +379,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/14/STL/" rel="next" title="天下第一のSTL">
-                <i class="fa fa-chevron-left"></i> 天下第一のSTL
+              <a href="/2020/05/16/potplayer/" rel="next" title="potplayer默认主题的优化与avs提取">
+                <i class="fa fa-chevron-left"></i> potplayer默认主题的优化与avs提取
               </a>
             
           </div>
@@ -372,10 +388,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/13/Ptilopsis/" rel="prev" title="白面鸮鼠标指针">
-                白面鸮鼠标指针 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -427,8 +439,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -523,6 +544,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-number">1.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意事项："><span class="nav-number">1.1.</span> <span class="nav-text">注意事项：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码及原理"><span class="nav-number">2.</span> <span class="nav-text">代码及原理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
