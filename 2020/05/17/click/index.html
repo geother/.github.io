@@ -97,7 +97,7 @@
 <meta property="og:description" content="我用的雷蛇驱动中鼠标宏想要连点必须按住不放，写的连点脚本却因为按键精灵频繁被迈克菲与火绒联合绞杀而难以应用。故使用C++调用Win api实现简易连点器。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://s1.ax1x.com/2020/05/17/Y21PgA.png">
-<meta property="og:updated_time" content="2020-05-17T05:31:30.140Z">
+<meta property="og:updated_time" content="2020-05-18T14:35:05.337Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="简易连点器工具放出">
 <meta name="twitter:description" content="我用的雷蛇驱动中鼠标宏想要连点必须按住不放，写的连点脚本却因为按键精灵频繁被迈克菲与火绒联合绞杀而难以应用。故使用C++调用Win api实现简易连点器。">
@@ -325,13 +325,15 @@
 <p><img src="https://s1.ax1x.com/2020/05/17/Y21PgA.png" alt></p>
 <a id="more"></a>
 <p>下载<code>click.zip</code>，解压后得到本体<code>click.exe</code>。</p>
-<p><a href="https://img.nga.178.com/attachments/mon_202005/17/-4bvoQ5-ler6K2a.zip?filename=click.zip" target="_blank" rel="noopener"><strong>点击下载</strong></a></p>
+<p><a href="https://img.nga.178.com/attachments/mon_202005/17/-4bvoQ5-ler6K2a.zip?filename=click.zip" target="_blank" rel="noopener"><strong>点击下载(被链住了，等蓝奏云)</strong></a></p>
 <h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>1.将鼠标移动到<strong>需要连点的位置</strong>，按键盘上的<strong>“S”</strong>键。</p>
 <p>2.按<strong>空格键</strong>开始连点，<strong>再次按下</strong>则停止连点。</p>
 <h3 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h3><p>第一步中，不要点击程序窗口以外的其他位置，只是把鼠标挪到相应位置再按S即可，否则程序不能读取到键盘活动。</p>
 <p>第二步可以反复开始停止，但是选定连点位置后不可更改位置，若更改位置需要重新启动此程序。</p>
 <p>所有操作皆为<strong>点击</strong>，不需要长按。</p>
-<h2 id="代码及原理"><a href="#代码及原理" class="headerlink" title="代码及原理"></a>代码及原理</h2><p>这个程序过于简单，没什么好说的。</p>
+<h2 id="代码及原理"><a href="#代码及原理" class="headerlink" title="代码及原理"></a>代码及原理</h2><p>这个程序只不过是把一些<code>win api</code>拼到一起。在网上找不到详细的说明文档，结果只能凭感觉硬试语法。谁能想到<code>GetCursorPos()</code>的实参是<code>POINT</code>类型啊，还以为随便一个结构体或者直接<code>pair</code>就行了，结果CE到怀疑人生。</p>
+<div class="note warning"><p>唯一比较难弄的地方是键盘检测几乎是实时的，如果不手动延时，计算机就会竭尽全力不断判定。</p>
+<p>调试时没开虚拟机，场面一度十分混乱。</p></div>
 <p><code>_Get()</code>函数获取坐标</p>
 <p><code>GetKeyState()</code>获取键盘状态</p>
 <p><code>mouse_event(MOUSEEVENTF_LEFTDOWN,M.x,M.y,0,0)</code>实现定点左击</p>
